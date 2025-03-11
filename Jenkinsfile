@@ -1,10 +1,15 @@
-/* Requires the Docker Pipeline plugin */
 pipeline {
-    agent { docker { image 'python:3.13.2-alpine3.21' } }
+    agent any
+
+    environment {
+        PATH = "/usr/local/bin:$PATH"
+    }
+
     stages {
-        stage('build') {
+        stage('Test Docker') {
             steps {
-                sh 'python --version'
+                sh 'docker --version'
+                sh 'docker run hello-world'
             }
         }
     }
